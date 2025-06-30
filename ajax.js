@@ -1,17 +1,21 @@
-import DataTable from 'datatables.net-dt'
-import { ajax } from 'jquery';
-$(document).ready(function(){
-  let table = new DataTable('#myTable');
-  
-  $("#botao-cadastrar").click(function() {
-    table= carregarDados();
-    console.log("cara",table)
-  })
-  ajax({
-    url:"agenda_contatos.php"
-  })
-});
 
+
+new DataTable('#myTable',{
+  info: false,
+  ordering: false,
+  paging: false,
+    ajax:"agenda_contatos.php",
+    columns: [
+        {data:'agenda_nome'},
+        {data:'agenda_telefone'},
+        {data:'agenda_email'},
+        {data:'agenda_data_nascimento'}
+      
+      ]
+      
+});
+ 
+   
 $(document).ready(function(){
   carregarDados();
 
@@ -95,6 +99,9 @@ $("tbody").on("click", ".botao-excluir", function () {
     var btnE = $("<button>")
       .text("Editar")
       .addClass("botao-editar")
+      .addClass("bi bi-pencil-square")
+      
+      .addClass("bi bi-pencil-square")
       .attr("data-id", item.agenda_id);
     var btnX = $("<button>")
       .text("Excluir")
